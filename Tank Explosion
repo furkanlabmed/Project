@@ -1,0 +1,28 @@
+def explosion(x, y, size=50):
+
+exp = True
+
+while exp:
+for event in pygame.event.get():
+if event.type == pygame.QUIT:
+pygame.quit()
+quit()
+
+startPoint = x, y
+
+choice_colors = [red, light_red, yellow, light_yellow]
+
+mgntde = 1
+
+while mgntde < size:
+exploding_bit_x = x + random.randrange(-1 * mgntde, mgntde)
+exploding_bit_y = y + random.randrange(-1 * mgntde, mgntde)
+
+pygame.draw.circle(game_layout_display, choice_colors[random.randrange(0, 4)], (exploding_bit_x, exploding_bit_y),
+random.randrange(1, 5))
+mgntde += 1
+
+pygame.display.update()
+clock.tick(100)
+
+exp = False
