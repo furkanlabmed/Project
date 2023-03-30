@@ -1,0 +1,133 @@
+def mainGame():
+    gameExit = False
+    gameOver = False
+    player_health = 100
+    enemy_health = 100
+    barrier_width = 50
+    mainTankX = width * 0.9
+    mainTankY = height * 0.9
+    tankMove = 0
+    currentTurPos = 0
+    changeTur = 0
+    enemyTankX = width * 0.1
+    enemyTankY = height * 0.9
+    fire_power = 50
+    power_change = 0
+    xlocation = (width / 2) + random.randint(int(-0.1 * width),int( 0.1 * width))
+    randomHeight = random.randint(int(height * 0.1), int(height * 0.6))
+    while True:
+        gameWin.fill('#ffffff')
+        Green = (0, 255, 0)
+        Red=(255,0,0)
+        text=''
+        color=''
+        show_message("DataFlair Tank Game", '#000000', -200, size="large")
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gameExit = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    tankMove = -5
+                elif event.key == pygame.K_RIGHT:
+                    tankMove = 5
+                elif event.key == pygame.K_UP:
+                    changeTur = 1
+                elif event.key == pygame.K_DOWN:
+                    changeTur = -1
+                elif event.key == pygame.K_p:
+                    pause()
+                elif event.key == pygame.K_SPACE:
+                    gameWin.fill('white')
+                    show_message("DataFlair Tank Game", '#000000', -200, size="large")
+                    show_health_bars(player_health, enemy_health)
+                    gun = tank(mainTankX, mainTankY, currentTurPos,1)
+                    enemy_gun = tank(enemyTankX, enemyTankY, 8,-1)
+                    fire_power += power_change
+                    font=pygame.font.SysFont("Calibre", 30)
+                    text = font.render("Power: " + str(fire_power) + "%", True, 'black')
+                    gameWin.blit(text, [width / 2, 0])
+                    text = font.render("Height: " + str(currentTurPos) + "%", True, 'black')
+                    gameWin.blit(text, [width / 2, 20])
+                    pygame.draw.rect(gameWin, 'green', [xlocation, height - randomHeight, barrier_width, randomHeight])
+                    gameWin.fill('green',
+                                        rect=[0,height - groundHeight, width, height])
+                    pygame.display.update()
+                    clock.tick(30)
+                   
+                    damage = fireShell(gun, mainTankX, mainTankY, currentTurPos, fire_power, xlocation, barrier_width,
+                                       randomHeight, enemyTankX, enemyTankY)
+                    enemy_health -= damage
+                    possibleMovement = ['f', 'r']
+                    moveIndex = random.randrange(0, 2)
+                    for x in range(random.randrange(0, 10)):
+                        if width * 0.3 > enemyTankX > width * 0.03:
+                            if possibleMovement[moveIndex] == "f":
+                                enemyTankX += 5
+                            elif possibleMovement[moveIndex] == "r":
+                                enemyTankX -= 5
+                            gameWin.fill('white')
+                            show_message("DataFlair Tank Game", '#000000', -200, size="large")
+                            show_health_bars(player_health, enemy_health)
+                            gun = tank(mainTankX, mainTankY, currentTurPos,1)
+                            enemy_gun = tank(enemyTankX, enemyTankY, 8,-1)
+                            fire_power += power_change
+                            font=pygame.font.SysFont("Calibre", 30)
+                            text = font.render("Power: " + str(fire_power) + "%", True, 'black')
+                            gameWin.blit(text, [width / 2, 0])
+                            text = font.render("Height: " + str(currentTurPos) + "%", True, 'black')
+                            gameWin.blit(text, [width / 2, 20])
+                            pygame.draw.rect(gameWin, 'green', [xlocation, height - randomHeight, barrier_width, randomHeight])
+                            gameWin.fill('green',
+                                             rect=[0,height - groundHeight, width, height])
+                            pygame.display.update()
+                            clock.tick(30)
+                    damage = compfireShell(enemy_gun, enemyTankX, enemyTankY, 8, 50, xlocation, barrier_width,
+                                         randomHeight, mainTankX, mainTankY)
+                    player_health -= damage
+               
+                elif event.key == pygame.K_a:
+                    power_change = -1
+                elif event.key == pygame.K_d:
+                    power_change = 1
+               
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    tankMove = 0
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    changeTur = 0
+                if event.key == pygame.K_a or event.key == pygame.K_d:
+                    power_change = 0
+           
+        mainTankX += tankMove
+        currentTurPos += changeTur
+        if currentTurPos > 8:
+            currentTurPos = 8
+        elif currentTurPos < 0:
+            currentTurPos = 0
+        if mainTankX - (tankWidth / 2) < xlocation + barrier_width:
+            mainTankX += 5
+   
+        show_health_bars(player_health, enemy_health)
+        gun = tank(mainTankX, mainTankY, currentTurPos,1)
+        enemy_gun = tank(enemyTankX, enemyTankY, 8,-1)
+        fire_power += power_change
+        if fire_power > 100:
+            fire_power = 100
+        elif fire_power < 1:
+            fire_power = 1
+               
+        font=pygame.font.SysFont("Calibre", 30)
+        text = font.render("Power: " + str(fire_power) + "%", True, 'black')
+        gameWin.blit(text, [width / 2, 0])
+        text = font.render("Height: " + str(currentTurPos) + "%", True, 'black')
+        gameWin.blit(text, [width / 2, 20])
+        pygame.draw.rect(gameWin, 'green', [xlocation, height - randomHeight, barrier_width, randomHeight])
+        gameWin.fill('green',rect=[0,height - groundHeight, width, height])
+        if player_health < 1 :
+            game_over(0)
+        elif enemy_health < 1:
+            game_over(1)
+        pygame.display.update()
+        clock.tick(30)
+   
+mainWindow()
