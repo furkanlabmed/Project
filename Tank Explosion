@@ -18,10 +18,6 @@ while mgntde < size:
 exploding_bit_x = x + random.randrange(-1 * mgntde, mgntde)
 exploding_bit_y = y + random.randrange(-1 * mgntde, mgntde)
 
-pygame.draw.circle(game_layout_display, choice_colors[random.randrange(0, 4)], (exploding_bit_x, exploding_bit_y),
-random.randrange(1, 5))
-mgntde += 1
-
 pygame.display.update()
 clock.tick(100)
 
