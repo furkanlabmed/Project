@@ -12,7 +12,7 @@ startPoint = x, y
 
 choice_colors = [red, light_red, yellow, light_yellow]
 
-mgntde = 1
+mgntde = 2
 
 while mgntde < size:
 exploding_bit_x = x + random.randrange(-1 * mgntde, mgntde)
