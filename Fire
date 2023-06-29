@@ -38,7 +38,7 @@ elif eTankX + 25 > hit_x > eTankX - 25:
 print("Medium Hit")
 damage = 10
 elif eTankX + 35 > hit_x > eTankX - 35:
-print("Light Hit")
+print("Low Hit")
 damage = 5
 
 explosion(hit_x, hit_y)
