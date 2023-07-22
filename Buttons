@@ -4,10 +4,9 @@ click = pygame.mouse.get_pressed()
 # print(click)
 if x + width > cursor[0] > x and y + height > cursor[1] > y:
 pygame.draw.rect(game_layout_display, active_color, (x, y, width, height))
-if click[0] == 1 and action != None:
+if click[0] == 2 and action != None:
 if action == "quit":
 pygame.quit()
-quit()
 
 if action == "controls":
 game_ctrls()
