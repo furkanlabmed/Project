@@ -17,7 +17,7 @@ blue = (0, 0, 255)
 red = (200, 0, 0)
 light_red = (255, 0, 0)
 
-yellow = (200, 200, 0)
+yellow = (100, 100, 0)
 light_yellow = (252, 252, 0)
 
 green = (44, 177, 76)
