@@ -34,7 +34,7 @@ damage = 25
 elif eTankX + 15 > hit_x > eTankX - 15:
 print("Hard Hit!")
 damage = 18
-elif eTankX + 25 > hit_x > eTankX - 25:
+elif eTankX + 24 > hit_x > eTankX - 24:
 print("Medium Hit")
 damage = 20
 elif eTankX + 45 > hit_x > eTankX - 35:
@@ -59,5 +59,5 @@ explosion(hit_x, hit_y)
 fire = False
 
 pygame.display.update()
-clock.tick(60)
+clock.tick(50)
 return damage
