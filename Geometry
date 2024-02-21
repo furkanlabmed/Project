@@ -1,5 +1,5 @@
-tnk_width = 60
-tnk_height = 25
+tnk_width = 120
+tnk_height = 125
 
-tur_width = 7
-whl_width = 7
+tur_width = 8
+whl_width = 8
