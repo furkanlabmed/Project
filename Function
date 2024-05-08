@@ -4,8 +4,8 @@ def mainGame():
     player_health = 100
     enemy_health = 100
     barrier_width = 50
-    mainTankX = width * 0.9
-    mainTankY = height * 0.9
+    mainTankX = width * 0.8
+    mainTankY = height * 0.8
     tankMove = 0
     currentTurPos = 0
     changeTur = 0
