@@ -1,4 +1,4 @@
-def explosion(x, y, size=50):
+def explosion(x, y, size=60):
 
 exp = True
 
